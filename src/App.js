@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import './styles/App.css';
+import {useState} from 'react';
+import Top from './components/top'
+import Middle from './components/middle'
+import Bottom from './components/bottom'
 
-function App() {
+const App=(props)=> {
+  const[data, setData]=useState({});
+  const[location, setLocation]=useState('')
+
+  const url =`http://api.weatherapi.com/v1/current.json?key=98cfd4a9cea441b184a150044220407&q=${location}`
+  
+
+  const handleChange=(e)=>{
+    setLocation(e.target.event);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='app'>
+      <div className='container'>
+      <div className='search'>
+        <input 
+          type='text'
+          value={location}      
+          name='search'
+          placeholder='Search City'
+          onChange={handleChange}
+          // onKeyPress = {searchLocation}   
+        />
+      </div>
+        <Top />
+        <Middle />
+        <Bottom />
+
+        
+        
+      </div>
+
     </div>
-  );
+  )
 }
 
 export default App;
